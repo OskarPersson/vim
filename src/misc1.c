@@ -10399,17 +10399,6 @@ unix_expandpath(gap, path, wildoff, flags, didstar)
 		    if ((flags & EW_ALLLINKS) ? mch_lstat((char *)buf, &sb) >= 0
 						      : mch_getperm(buf) >= 0)
 		    {
-#ifdef MACOS_CONVERT
-			size_t precomp_len = STRLEN(buf)+1;
-			char_u *precomp_buf =
-			    mac_precompose_path(buf, precomp_len, &precomp_len);
-
-			if (precomp_buf)
-			{
-			    mch_memmove(buf, precomp_buf, precomp_len);
-			    vim_free(precomp_buf);
-			}
-#endif
 			addfile(gap, buf, flags);
 		    }
 		}
